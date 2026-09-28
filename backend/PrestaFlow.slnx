@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/PrestaFlow.Api/PrestaFlow.Api.csproj" />
+    <Project Path="src/PrestaFlow.Application/PrestaFlow.Application.csproj" />
+    <Project Path="src/PrestaFlow.Domain/PrestaFlow.Domain.csproj" />
+    <Project Path="src/PrestaFlow.Infrastructure/PrestaFlow.Infrastructure.csproj" />
+  </Folder>
+</Solution>
