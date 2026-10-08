@@ -22,9 +22,9 @@ Hoja de ruta del proyecto, organizada en fases. Cada fase se cierra con un Pull 
 ## Fase 0 · Preparación del entorno
 
 - [x] Repositorio con README y `.gitignore` para .NET y Node
-- [x] Suscripción de Azure con alerta de presupuesto
-- [x] Organización y proyecto en Azure DevOps
 - [x] Entorno local: .NET 10 SDK, Node LTS, Azure CLI y Docker
+
+> La suscripción de Azure se pospuso a la fase 4 y Azure DevOps a la fase 5: no hacen falta hasta publicar.
 
 ## Fase 1 · API y dominio
 
@@ -70,6 +70,7 @@ Hoja de ruta del proyecto, organizada en fases. Cada fase se cierra con un Pull 
 
 **Objetivo:** sistema accesible desde internet.
 
+- [ ] Suscripción de Azure con alerta de presupuesto (pospuesta desde la fase 0)
 - [ ] Resource Group del proyecto
 - [ ] Azure SQL Database con las migraciones aplicadas
 - [ ] API publicada en Azure App Service
@@ -82,6 +83,7 @@ Hoja de ruta del proyecto, organizada en fases. Cada fase se cierra con un Pull 
 
 **Objetivo:** cada cambio se compila, se prueba y se publica automáticamente.
 
+- [ ] Organización y proyecto en Azure DevOps (pospuesto desde la fase 0)
 - [ ] Azure Pipelines conectado al repositorio de GitHub
 - [ ] `azure-pipelines.yml` con etapas de build, test y deploy
 - [ ] Backend: build, tests y deploy a App Service
