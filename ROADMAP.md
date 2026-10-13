@@ -32,7 +32,7 @@ Hoja de ruta del proyecto, organizada en fases. Cada fase se cierra con un Pull 
 
 - [x] Solución en capas: Domain, Application, Infrastructure y Api, con sus referencias
 - [ ] Entidades `Cliente` y `Solicitud`, con el enum de estados
-- [ ] Regla de cálculo de riesgo en el dominio, sin dependencias externas
+- [x] Regla de cálculo de riesgo en el dominio, sin dependencias externas
 - [ ] `DbContext`, configuración de entidades y migraciones con EF Core (SQL Server en Docker)
 - [ ] Endpoints de clientes: alta y listado
 - [ ] Endpoints de solicitudes: alta, listado con filtros, aprobación y rechazo
