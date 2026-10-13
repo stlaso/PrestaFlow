@@ -31,7 +31,7 @@ Hoja de ruta del proyecto, organizada en fases. Cada fase se cierra con un Pull 
 **Objetivo:** API funcionando en local con base de datos y documentación OpenAPI.
 
 - [x] Solución en capas: Domain, Application, Infrastructure y Api, con sus referencias
-- [ ] Entidades `Cliente` y `Solicitud`, con el enum de estados
+- [x] Entidades `Cliente` y `Solicitud`, con el enum de estados
 - [x] Regla de cálculo de riesgo en el dominio, sin dependencias externas
 - [ ] `DbContext`, configuración de entidades y migraciones con EF Core (SQL Server en Docker)
 - [ ] Endpoints de clientes: alta y listado

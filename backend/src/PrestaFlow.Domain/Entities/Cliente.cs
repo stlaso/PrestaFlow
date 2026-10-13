@@ -37,7 +37,6 @@ public class Cliente
         ActualizarContacto(telefono, email);
     }
 
-    // Para EF Core.
     private Cliente() { }
 
     // El DNI no tiene método de cambio: es inmutable.
