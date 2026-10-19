@@ -34,7 +34,7 @@ Hoja de ruta del proyecto, organizada en fases. Cada fase se cierra con un Pull 
 - [x] Entidades `Cliente` y `Solicitud`, con el enum de estados
 - [ ] Baja lógica de clientes: dominio, filtro de consultas y endpoints de baja y reactivación
 - [x] Regla de cálculo de riesgo en el dominio, sin dependencias externas
-- [ ] `DbContext`, configuración de entidades y migraciones con EF Core (SQL Server en Docker)
+- [x] `DbContext`, configuración de entidades y migraciones con EF Core (SQL Server en Docker)
 - [ ] Endpoints de clientes: alta y listado
 - [ ] Endpoints de solicitudes: alta, listado con filtros, aprobación y rechazo
 - [ ] Validaciones y manejo global de errores con Problem Details
