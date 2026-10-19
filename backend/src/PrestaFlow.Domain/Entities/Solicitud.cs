@@ -35,6 +35,9 @@ public class Solicitud
     {
         ArgumentNullException.ThrowIfNull(cliente);
 
+        if (!cliente.EstaActivo)
+            throw new DomainException("No se puede crear una solicitud para un cliente dado de baja.");
+
         if (monto <= 0)
             throw new DomainException("El monto debe ser mayor a cero.");
 

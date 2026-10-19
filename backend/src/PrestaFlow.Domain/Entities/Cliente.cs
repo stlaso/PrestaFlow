@@ -15,6 +15,9 @@ public class Cliente
     public string Email { get; private set; } = string.Empty;
     public DateOnly FechaNacimiento { get; private set; }
     public string Ocupacion { get; private set; } = string.Empty;
+    public DateTime? FechaBaja { get; private set; }
+
+    public bool EstaActivo => FechaBaja is null;
 
     public Cliente(
         string nombre,
@@ -44,6 +47,22 @@ public class Cliente
     {
         Telefono = Requerido(telefono, "teléfono");
         Email = ValidarEmail(email);
+    }
+
+    public void DarDeBaja(DateTime fecha)
+    {
+        if (!EstaActivo)
+            throw new DomainException("El cliente ya está dado de baja.");
+
+        FechaBaja = fecha;
+    }
+
+    public void Reactivar()
+    {
+        if (EstaActivo)
+            throw new DomainException("El cliente ya está activo.");
+
+        FechaBaja = null;
     }
 
     private static string Requerido(string valor, string campo)
