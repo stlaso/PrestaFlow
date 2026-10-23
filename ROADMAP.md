@@ -32,12 +32,12 @@ Hoja de ruta del proyecto, organizada en fases. Cada fase se cierra con un Pull 
 
 - [x] Solución en capas: Domain, Application, Infrastructure y Api, con sus referencias
 - [x] Entidades `Cliente` y `Solicitud`, con el enum de estados
-- [ ] Baja lógica de clientes: dominio, filtro de consultas y endpoints de baja y reactivación
 - [x] Regla de cálculo de riesgo en el dominio, sin dependencias externas
 - [x] `DbContext`, configuración de entidades y migraciones con EF Core (SQL Server en Docker)
-- [ ] Endpoints de clientes: alta y listado
-- [ ] Endpoints de solicitudes: alta, listado con filtros, aprobación y rechazo
+- [x] Endpoints de clientes: alta, consulta por id y listado
 - [ ] Validaciones y manejo global de errores con Problem Details
+- [ ] Baja lógica de clientes: dominio, filtro de consultas y endpoints de baja y reactivación
+- [ ] Endpoints de solicitudes: alta, listado con filtros, aprobación y rechazo
 
 **Entregable:** la API se prueba completa desde Swagger.
 
