@@ -52,7 +52,7 @@ public class Cliente
     public void DarDeBaja(DateTime fecha)
     {
         if (!EstaActivo)
-            throw new DomainException("El cliente ya está dado de baja.");
+            throw new ConflictoException("El cliente ya está dado de baja.");
 
         FechaBaja = fecha;
     }
@@ -60,7 +60,7 @@ public class Cliente
     public void Reactivar()
     {
         if (EstaActivo)
-            throw new DomainException("El cliente ya está activo.");
+            throw new ConflictoException("El cliente ya está activo.");
 
         FechaBaja = null;
     }

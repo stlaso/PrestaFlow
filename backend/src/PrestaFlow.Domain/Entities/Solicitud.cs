@@ -36,7 +36,7 @@ public class Solicitud
         ArgumentNullException.ThrowIfNull(cliente);
 
         if (!cliente.EstaActivo)
-            throw new DomainException("No se puede crear una solicitud para un cliente dado de baja.");
+            throw new ConflictoException("No se puede crear una solicitud para un cliente dado de baja.");
 
         if (monto <= 0)
             throw new DomainException("El monto debe ser mayor a cero.");
@@ -87,6 +87,6 @@ public class Solicitud
     private void ValidarPendiente()
     {
         if (Estado != EstadoSolicitud.Pendiente)
-            throw new DomainException($"Solo se puede resolver una solicitud pendiente. Estado actual: {Estado}.");
+            throw new ConflictoException($"Solo se puede resolver una solicitud pendiente. Estado actual: {Estado}.");
     }
 }
