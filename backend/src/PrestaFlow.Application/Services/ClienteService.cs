@@ -1,3 +1,4 @@
+using FluentValidation;
 using PrestaFlow.Application.Dtos;
 using PrestaFlow.Application.Interfaces;
 using PrestaFlow.Domain.Entities;
@@ -5,10 +6,15 @@ using PrestaFlow.Domain.Exceptions;
 
 namespace PrestaFlow.Application.Services;
 
-public class ClienteService(IClienteRepository clientes, IUnitOfWork unitOfWork) : IClienteService
+public class ClienteService(
+    IClienteRepository clientes,
+    IUnitOfWork unitOfWork,
+    IValidator<CrearClienteRequest> validadorAlta) : IClienteService
 {
     public async Task<ClienteResponse> CrearAsync(CrearClienteRequest request, CancellationToken cancellationToken = default)
     {
+        await validadorAlta.ValidateAndThrowAsync(request, cancellationToken);
+
         var cliente = new Cliente(
             nombre: request.Nombre,
             apellido: request.Apellido,

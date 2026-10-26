@@ -5,6 +5,11 @@ namespace PrestaFlow.Domain.Entities;
 
 public class Cliente
 {
+    public const int LargoMaximoTexto = 100;
+    public const int LargoMaximoEmail = 254;
+    public const int LargoMaximoTelefono = 20;
+    public const int LargoMaximoDni = 8;
+
     public int Id { get; private set; }
     public string Nombre { get; private set; } = string.Empty;
     public string Apellido { get; private set; } = string.Empty;

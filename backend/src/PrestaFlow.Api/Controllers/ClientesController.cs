@@ -6,7 +6,6 @@ namespace PrestaFlow.Api.Controllers;
 
 [ApiController]
 [Route("api/clientes")]
-[Produces("application/json")]
 public class ClientesController(IClienteService clienteService) : ControllerBase
 {
     [HttpPost]
