@@ -34,4 +34,24 @@ public class ClientesController(IClienteService clienteService) : ControllerBase
         var clientes = await clienteService.ListarAsync(incluirBajas, cancellationToken);
         return Ok(clientes);
     }
+
+    [HttpDelete("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status409Conflict)]
+    public async Task<IActionResult> DarDeBaja(int id, CancellationToken cancellationToken)
+    {
+        var encontrado = await clienteService.DarDeBajaAsync(id, cancellationToken);
+        return encontrado ? NoContent() : NotFound();
+    }
+
+    [HttpPost("{id:int}/reactivar")]
+    [ProducesResponseType<ClienteResponse>(StatusCodes.Status200OK)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status409Conflict)]
+    public async Task<ActionResult<ClienteResponse>> Reactivar(int id, CancellationToken cancellationToken)
+    {
+        var cliente = await clienteService.ReactivarAsync(id, cancellationToken);
+        return cliente is null ? NotFound() : Ok(cliente);
+    }
 }

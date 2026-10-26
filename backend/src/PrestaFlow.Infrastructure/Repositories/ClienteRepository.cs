@@ -11,6 +11,11 @@ public class ClienteRepository(PrestaFlowDbContext db) : IClienteRepository
     public Task<Cliente?> ObtenerPorIdAsync(int id, CancellationToken cancellationToken = default) =>
         db.Clientes.FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
 
+    public Task<Cliente?> ObtenerPorIdIncluyendoBajasAsync(int id, CancellationToken cancellationToken = default) =>
+        db.Clientes
+            .IgnoreQueryFilters([ClienteConfiguration.FiltroActivos])
+            .FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
+
     public Task<Cliente?> ObtenerPorDniIncluyendoBajasAsync(string dni, CancellationToken cancellationToken = default) =>
         db.Clientes
             .IgnoreQueryFilters([ClienteConfiguration.FiltroActivos])

@@ -9,4 +9,8 @@ public interface IClienteService
     Task<ClienteResponse?> ObtenerPorIdAsync(int id, CancellationToken cancellationToken = default);
 
     Task<IReadOnlyList<ClienteResponse>> ListarAsync(bool incluirBajas, CancellationToken cancellationToken = default);
+
+    Task<bool> DarDeBajaAsync(int id, CancellationToken cancellationToken = default);
+
+    Task<ClienteResponse?> ReactivarAsync(int id, CancellationToken cancellationToken = default);
 }

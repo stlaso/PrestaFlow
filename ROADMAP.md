@@ -36,7 +36,7 @@ Hoja de ruta del proyecto, organizada en fases. Cada fase se cierra con un Pull 
 - [x] `DbContext`, configuración de entidades y migraciones con EF Core (SQL Server en Docker)
 - [x] Endpoints de clientes: alta, consulta por id y listado
 - [x] Validaciones y manejo global de errores con Problem Details
-- [ ] Baja lógica de clientes: dominio, filtro de consultas y endpoints de baja y reactivación
+- [x] Baja lógica de clientes: dominio, filtro de consultas y endpoints de baja y reactivación
 - [ ] Endpoints de solicitudes: alta, listado con filtros, aprobación y rechazo
 
 **Entregable:** la API se prueba completa desde Swagger.

@@ -20,6 +20,7 @@ public static class DependencyInjection
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<PrestaFlowDbContext>());
 
         services.AddScoped<IClienteRepository, ClienteRepository>();
+        services.AddScoped<ISolicitudRepository, SolicitudRepository>();
 
         return services;
     }

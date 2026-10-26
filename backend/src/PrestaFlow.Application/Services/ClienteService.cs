@@ -8,8 +8,10 @@ namespace PrestaFlow.Application.Services;
 
 public class ClienteService(
     IClienteRepository clientes,
+    ISolicitudRepository solicitudes,
     IUnitOfWork unitOfWork,
-    IValidator<CrearClienteRequest> validadorAlta) : IClienteService
+    IValidator<CrearClienteRequest> validadorAlta,
+    TimeProvider timeProvider) : IClienteService
 {
     public async Task<ClienteResponse> CrearAsync(CrearClienteRequest request, CancellationToken cancellationToken = default)
     {
@@ -54,5 +56,35 @@ public class ClienteService(
         var lista = await clientes.ListarAsync(incluirBajas, cancellationToken);
 
         return lista.Select(ClienteResponse.Desde).ToList();
+    }
+
+    public async Task<bool> DarDeBajaAsync(int id, CancellationToken cancellationToken = default)
+    {
+        var cliente = await clientes.ObtenerPorIdIncluyendoBajasAsync(id, cancellationToken);
+
+        if (cliente is null)
+            return false;
+
+        // Antes de tocar la entidad, para no dejar el change tracker con una baja que no se va a guardar.
+        if (await solicitudes.ExistenPendientesAsync(id, cancellationToken))
+            throw new ConflictoException("No se puede dar de baja: el cliente tiene solicitudes pendientes.");
+
+        cliente.DarDeBaja(timeProvider.GetUtcNow().UtcDateTime);
+        await unitOfWork.GuardarCambiosAsync(cancellationToken);
+
+        return true;
+    }
+
+    public async Task<ClienteResponse?> ReactivarAsync(int id, CancellationToken cancellationToken = default)
+    {
+        var cliente = await clientes.ObtenerPorIdIncluyendoBajasAsync(id, cancellationToken);
+
+        if (cliente is null)
+            return null;
+
+        cliente.Reactivar();
+        await unitOfWork.GuardarCambiosAsync(cancellationToken);
+
+        return ClienteResponse.Desde(cliente);
     }
 }
