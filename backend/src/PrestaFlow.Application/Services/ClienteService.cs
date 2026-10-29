@@ -11,7 +11,7 @@ public class ClienteService(
     ISolicitudRepository solicitudes,
     IUnitOfWork unitOfWork,
     IValidator<CrearClienteRequest> validadorAlta,
-    TimeProvider timeProvider) : IClienteService
+    RelojNegocio reloj) : IClienteService
 {
     public async Task<ClienteResponse> CrearAsync(CrearClienteRequest request, CancellationToken cancellationToken = default)
     {
@@ -69,7 +69,7 @@ public class ClienteService(
         if (await solicitudes.ExistenPendientesAsync(id, cancellationToken))
             throw new ConflictoException("No se puede dar de baja: el cliente tiene solicitudes pendientes.");
 
-        cliente.DarDeBaja(timeProvider.GetUtcNow().UtcDateTime);
+        cliente.DarDeBaja(reloj.AhoraUtc());
         await unitOfWork.GuardarCambiosAsync(cancellationToken);
 
         return true;

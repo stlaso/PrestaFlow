@@ -30,6 +30,12 @@ public class PrestaFlowDbContext(DbContextOptions<PrestaFlowDbContext> options) 
         }
     }
 
+    // datetime2 no guarda la zona: al leer, EF devolvería Kind=Unspecified y el JSON saldría sin la "Z".
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        configurationBuilder.Properties<DateTime>().HaveConversion<FechaUtcConverter>();
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(PrestaFlowDbContext).Assembly);

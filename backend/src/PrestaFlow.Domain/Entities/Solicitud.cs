@@ -9,6 +9,9 @@ public class Solicitud
     private const int CuotasMinimas = 1;
     private const int CuotasMaximas = 60;
     private const int EdadMinima = 18;
+    private const int EdadMaxima = 65;
+
+    public const int LargoMaximoMotivo = 500;
 
     public int Id { get; private set; }
     public int ClienteId { get; private set; }
@@ -31,7 +34,8 @@ public class Solicitud
         int cantidadCuotas,
         decimal ingresoMensual,
         DateOnly fechaPrimerPago,
-        DateTime fechaCreacion)
+        DateTime fechaCreacion,
+        DateOnly diaCreacion)
     {
         ArgumentNullException.ThrowIfNull(cliente);
 
@@ -44,13 +48,16 @@ public class Solicitud
         if (cantidadCuotas is < CuotasMinimas or > CuotasMaximas)
             throw new DomainException($"La cantidad de cuotas debe estar entre {CuotasMinimas} y {CuotasMaximas}.");
 
-        var diaCreacion = DateOnly.FromDateTime(fechaCreacion);
-
         if (fechaPrimerPago <= diaCreacion)
             throw new DomainException("La fecha del primer pago debe ser posterior a la fecha de creación.");
 
         if (cliente.FechaNacimiento.AddYears(EdadMinima) > diaCreacion)
             throw new DomainException($"El cliente debe ser mayor de {EdadMinima} años.");
+
+        var fechaUltimoPago = fechaPrimerPago.AddMonths(cantidadCuotas - 1);
+
+        if (cliente.FechaNacimiento.AddYears(EdadMaxima) <= fechaUltimoPago)
+            throw new DomainException($"El préstamo debe terminar de pagarse antes de que el cliente cumpla {EdadMaxima} años (último pago: {fechaUltimoPago:dd/MM/yyyy}).");
 
         Cliente = cliente;
         ClienteId = cliente.Id;

@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using FluentValidation;
 using PrestaFlow.Application.Dtos;
+using PrestaFlow.Application.Services;
 using PrestaFlow.Domain.Entities;
 
 namespace PrestaFlow.Application.Validators;
@@ -9,7 +10,7 @@ public sealed class CrearClienteRequestValidator : AbstractValidator<CrearClient
 {
     public const int EdadMaximaRazonable = 120;
 
-    public CrearClienteRequestValidator(TimeProvider timeProvider)
+    public CrearClienteRequestValidator(RelojNegocio reloj)
     {
         LargoMaximo(r => r.Nombre, Cliente.LargoMaximoTexto);
         LargoMaximo(r => r.Apellido, Cliente.LargoMaximoTexto);
@@ -23,9 +24,9 @@ public sealed class CrearClienteRequestValidator : AbstractValidator<CrearClient
             .Cascade(CascadeMode.Stop)
             .NotEmpty()
                 .WithMessage("La fecha de nacimiento es obligatoria.")
-            .LessThanOrEqualTo(_ => Hoy(timeProvider))
+            .LessThanOrEqualTo(_ => reloj.Hoy())
                 .WithMessage("La fecha de nacimiento no puede ser futura.")
-            .GreaterThan(_ => Hoy(timeProvider).AddYears(-EdadMaximaRazonable))
+            .GreaterThan(_ => reloj.Hoy().AddYears(-EdadMaximaRazonable))
                 .WithMessage($"La fecha de nacimiento no puede ser de hace más de {EdadMaximaRazonable} años.");
     }
 
@@ -33,7 +34,4 @@ public sealed class CrearClienteRequestValidator : AbstractValidator<CrearClient
         RuleFor(campo)
             .MaximumLength(largo)
             .WithMessage("No puede superar los {MaxLength} caracteres (tiene {TotalLength}).");
-
-    private static DateOnly Hoy(TimeProvider timeProvider) =>
-        DateOnly.FromDateTime(timeProvider.GetUtcNow().UtcDateTime);
 }

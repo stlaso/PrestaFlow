@@ -136,6 +136,10 @@ namespace PrestaFlow.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("ClienteId");
 
+                    b.HasIndex(new[] { "ClienteId" }, "UX_Solicitudes_ClienteId_Pendiente")
+                        .IsUnique()
+                        .HasFilter("[Estado] = 1");
+
                     b.ToTable("Solicitudes");
                 });
 
