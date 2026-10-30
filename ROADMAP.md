@@ -22,21 +22,22 @@ Hoja de ruta del proyecto, organizada en fases. Cada fase se cierra con un Pull 
 ## Fase 0 · Preparación del entorno
 
 - [x] Repositorio con README y `.gitignore` para .NET y Node
-- [x] Suscripción de Azure con alerta de presupuesto
-- [x] Organización y proyecto en Azure DevOps
 - [x] Entorno local: .NET 10 SDK, Node LTS, Azure CLI y Docker
+
+> La suscripción de Azure se pospuso a la fase 4 y Azure DevOps a la fase 5: no hacen falta hasta publicar.
 
 ## Fase 1 · API y dominio
 
 **Objetivo:** API funcionando en local con base de datos y documentación OpenAPI.
 
 - [x] Solución en capas: Domain, Application, Infrastructure y Api, con sus referencias
-- [ ] Entidades `Cliente` y `Solicitud`, con el enum de estados
-- [ ] Regla de cálculo de riesgo en el dominio, sin dependencias externas
-- [ ] `DbContext`, configuración de entidades y migraciones con EF Core (SQL Server en Docker)
-- [ ] Endpoints de clientes: alta y listado
-- [ ] Endpoints de solicitudes: alta, listado con filtros, aprobación y rechazo
-- [ ] Validaciones y manejo global de errores con Problem Details
+- [x] Entidades `Cliente` y `Solicitud`, con el enum de estados
+- [x] Regla de cálculo de riesgo en el dominio, sin dependencias externas
+- [x] `DbContext`, configuración de entidades y migraciones con EF Core (SQL Server en Docker)
+- [x] Endpoints de clientes: alta, consulta por id y listado
+- [x] Validaciones y manejo global de errores con Problem Details
+- [x] Baja lógica de clientes: dominio, filtro de consultas y endpoints de baja y reactivación
+- [x] Endpoints de solicitudes: alta, listado con filtros, aprobación y rechazo
 
 **Entregable:** la API se prueba completa desde Swagger.
 
@@ -70,6 +71,7 @@ Hoja de ruta del proyecto, organizada en fases. Cada fase se cierra con un Pull 
 
 **Objetivo:** sistema accesible desde internet.
 
+- [ ] Suscripción de Azure con alerta de presupuesto (pospuesta desde la fase 0)
 - [ ] Resource Group del proyecto
 - [ ] Azure SQL Database con las migraciones aplicadas
 - [ ] API publicada en Azure App Service
@@ -82,6 +84,7 @@ Hoja de ruta del proyecto, organizada en fases. Cada fase se cierra con un Pull 
 
 **Objetivo:** cada cambio se compila, se prueba y se publica automáticamente.
 
+- [ ] Organización y proyecto en Azure DevOps (pospuesto desde la fase 0)
 - [ ] Azure Pipelines conectado al repositorio de GitHub
 - [ ] `azure-pipelines.yml` con etapas de build, test y deploy
 - [ ] Backend: build, tests y deploy a App Service
