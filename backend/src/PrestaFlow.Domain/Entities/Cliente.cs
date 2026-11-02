@@ -82,7 +82,7 @@ public class Cliente
     {
         dni = Requerido(dni, "DNI");
 
-        if (dni.Length is not (7 or 8) || !dni.All(char.IsDigit))
+        if (dni.Length is not (7 or 8) || !dni.All(char.IsAsciiDigit))
             throw new DomainException("El DNI debe tener 7 u 8 dígitos, sin puntos.");
 
         return dni;
