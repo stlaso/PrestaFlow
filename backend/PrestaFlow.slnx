@@ -5,4 +5,7 @@
     <Project Path="src/PrestaFlow.Domain/PrestaFlow.Domain.csproj" />
     <Project Path="src/PrestaFlow.Infrastructure/PrestaFlow.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/PrestaFlow.UnitTests/PrestaFlow.UnitTests.csproj" />
+  </Folder>
 </Solution>

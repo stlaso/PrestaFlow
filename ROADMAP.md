@@ -7,8 +7,8 @@ Hoja de ruta del proyecto, organizada en fases. Cada fase se cierra con un Pull 
 | Fase | Tema | Estado |
 | --- | --- | --- |
 | 0 | Preparación del entorno | ✅ |
-| 1 | API y dominio | 🚧 |
-| 2 | Tests de backend | ⏳ |
+| 1 | API y dominio | ✅ |
+| 2 | Tests de backend | 🚧 |
 | 3 | Frontend React | ⏳ |
 | 4 | Publicación en Azure | ⏳ |
 | 5 | CI/CD | ⏳ |
@@ -45,10 +45,15 @@ Hoja de ruta del proyecto, organizada en fases. Cada fase se cierra con un Pull 
 
 **Objetivo:** lógica de negocio cubierta por tests.
 
-- [ ] Proyecto de tests unitarios con xUnit y Moq
-- [ ] Tests de la regla de riesgo con casos parametrizados (`[Theory]`)
-- [ ] Tests de los servicios de aplicación con repositorios simulados
-- [ ] Tests de integración de los endpoints con `WebApplicationFactory`
+- [x] Proyecto de tests unitarios con xUnit y Moq
+- [x] Tests de la regla de riesgo con casos parametrizados (`[Theory]`)
+- [x] Tests de las entidades `Solicitud` y `Cliente`: validaciones, edades y transiciones de estado
+- [x] Tests de `RelojNegocio` con `FakeTimeProvider` (día del negocio en Argentina vs UTC)
+- [ ] Tests de los servicios de aplicación con repositorios simulados, incluido el mapeo a DTOs
+- [ ] Proyecto de tests de integración con Testcontainers (SQL Server), `WebApplicationFactory` y Respawn
+- [ ] Tests de integración de los endpoints de clientes y solicitudes
+- [ ] Tests de concurrencia: índice único de DNI, índice filtrado de pendientes y `RowVersion`
+- [ ] ADR de la estrategia de testing
 
 **Entregable:** `dotnet test` en verde.
 
