@@ -50,7 +50,7 @@ Hoja de ruta del proyecto, organizada en fases. Cada fase se cierra con un Pull 
 - [x] Tests de las entidades `Solicitud` y `Cliente`: validaciones, edades y transiciones de estado
 - [x] Tests de `RelojNegocio` con `FakeTimeProvider` (día del negocio en Argentina vs UTC)
 - [x] Tests de los servicios de aplicación con repositorios simulados, incluido el mapeo a DTOs
-- [ ] Proyecto de tests de integración con Testcontainers (SQL Server), `WebApplicationFactory` y Respawn
+- [x] Proyecto de tests de integración con Testcontainers (SQL Server), `WebApplicationFactory` y Respawn
 - [ ] Tests de integración de los endpoints de clientes y solicitudes
 - [ ] Tests de concurrencia: índice único de DNI, índice filtrado de pendientes y `RowVersion`
 - [ ] ADR de la estrategia de testing
