@@ -1,5 +1,4 @@
 using FluentValidation;
-using Microsoft.Extensions.Time.Testing;
 using Moq;
 using PrestaFlow.Application.Dtos;
 using PrestaFlow.Application.Interfaces;
@@ -26,9 +25,7 @@ public class ClienteServiceTests
 
     public ClienteServiceTests()
     {
-        var reloj = new RelojNegocio(
-            new FakeTimeProvider(new DateTimeOffset(Ahora)),
-            TimeZoneInfo.FindSystemTimeZoneById("America/Argentina/Buenos_Aires"));
+        var reloj = RelojDePrueba.Crear(Ahora);
 
         _service = new ClienteService(
             _clientes.Object,

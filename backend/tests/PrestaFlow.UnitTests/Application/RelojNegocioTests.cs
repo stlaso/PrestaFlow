@@ -1,18 +1,16 @@
 using Microsoft.Extensions.Time.Testing;
 using PrestaFlow.Application.Services;
+using PrestaFlow.UnitTests.Builders;
 
 namespace PrestaFlow.UnitTests.Application;
 
 public class RelojNegocioTests
 {
-    private static readonly TimeZoneInfo ZonaArgentina =
-        TimeZoneInfo.FindSystemTimeZoneById("America/Argentina/Buenos_Aires");
-
     private static (RelojNegocio Reloj, FakeTimeProvider Tiempo) CrearReloj(DateTime instanteUtc)
     {
         var tiempo = new FakeTimeProvider(new DateTimeOffset(instanteUtc));
 
-        return (new RelojNegocio(tiempo, ZonaArgentina), tiempo);
+        return (RelojDePrueba.Crear(tiempo), tiempo);
     }
 
     private static DateTime Utc(int anio, int mes, int dia, int hora, int minuto, int segundo = 0) =>
