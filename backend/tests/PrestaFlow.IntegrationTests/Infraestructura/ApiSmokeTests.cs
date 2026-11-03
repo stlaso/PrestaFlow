@@ -6,16 +6,11 @@ using PrestaFlow.Application.Services;
 
 namespace PrestaFlow.IntegrationTests.Infraestructura;
 
-[Collection(ColeccionIntegracion.Nombre)]
-public class ApiSmokeTests(PrestaFlowApiFactory factory)
+public class ApiSmokeTests(PrestaFlowApiFactory factory) : PruebaDeIntegracion(factory)
 {
-    private static CancellationToken Ct => TestContext.Current.CancellationToken;
-
-    private readonly HttpClient _cliente = factory.CreateClient();
-
     private async Task<List<ClienteResponse>> ListarClientesAsync()
     {
-        var lista = await _cliente.GetFromJsonAsync<List<ClienteResponse>>("/api/clientes", Ct);
+        var lista = await Http.GetFromJsonAsync<List<ClienteResponse>>("/api/clientes", Ct);
 
         return lista!;
     }
@@ -23,9 +18,7 @@ public class ApiSmokeTests(PrestaFlowApiFactory factory)
     [Fact]
     public async Task ListarClientes_ConLaBaseLimpia_DevuelveOkYListaVacia()
     {
-        await factory.LimpiarAsync();
-
-        var respuesta = await _cliente.GetAsync("/api/clientes", Ct);
+        var respuesta = await Http.GetAsync("/api/clientes", Ct);
 
         Assert.Equal(HttpStatusCode.OK, respuesta.StatusCode);
         Assert.Empty(await ListarClientesAsync());
@@ -34,7 +27,6 @@ public class ApiSmokeTests(PrestaFlowApiFactory factory)
     [Fact]
     public async Task LimpiarAsync_BorraLoCreadoPorLaApi()
     {
-        await factory.LimpiarAsync();
         var request = new CrearClienteRequest(
             Nombre: "Ana",
             Apellido: "Pérez",
@@ -46,12 +38,12 @@ public class ApiSmokeTests(PrestaFlowApiFactory factory)
             FechaNacimiento: new DateOnly(1990, 5, 15),
             Ocupacion: "Docente");
 
-        var alta = await _cliente.PostAsJsonAsync("/api/clientes", request, Ct);
+        var alta = await Http.PostAsJsonAsync("/api/clientes", request, Ct);
 
         Assert.Equal(HttpStatusCode.Created, alta.StatusCode);
         Assert.Single(await ListarClientesAsync());
 
-        await factory.LimpiarAsync();
+        await Factory.LimpiarAsync();
 
         Assert.Empty(await ListarClientesAsync());
     }
@@ -59,8 +51,8 @@ public class ApiSmokeTests(PrestaFlowApiFactory factory)
     [Fact]
     public void RelojDeLaApi_UsaElTiempoFalso()
     {
-        var reloj = factory.Services.GetRequiredService<RelojNegocio>();
+        var reloj = Factory.Services.GetRequiredService<RelojNegocio>();
 
-        Assert.Equal(PrestaFlowApiFactory.InstanteInicial.UtcDateTime, reloj.AhoraUtc());
+        Assert.Equal(Factory.Tiempo.GetUtcNow().UtcDateTime, reloj.AhoraUtc());
     }
 }
