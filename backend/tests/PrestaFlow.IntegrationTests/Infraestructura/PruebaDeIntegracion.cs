@@ -1,5 +1,7 @@
 using System.Net;
 using System.Net.Http.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PrestaFlow.IntegrationTests.Infraestructura;
@@ -8,6 +10,12 @@ namespace PrestaFlow.IntegrationTests.Infraestructura;
 [Collection(ColeccionIntegracion.Nombre)]
 public abstract class PruebaDeIntegracion(PrestaFlowApiFactory factory) : IAsyncLifetime
 {
+    // Replica la configuración de Program.cs: la Api manda los enums como texto.
+    protected static JsonSerializerOptions JsonApi { get; } = new(JsonSerializerDefaults.Web)
+    {
+        Converters = { new JsonStringEnumConverter() }
+    };
+
     protected static CancellationToken Ct => TestContext.Current.CancellationToken;
 
     protected PrestaFlowApiFactory Factory => factory;
