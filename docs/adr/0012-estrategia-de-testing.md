@@ -39,7 +39,4 @@ Dos proyectos, según lo que cada test necesita para fallar:
 - La suite es más lenta que una solo de unitarios, porque descarga la imagen la primera vez y levanta el contenedor en cada corrida.
 - Sin un `ThenBy` de desempate, SQL Server no garantiza el orden de los empates: el test de orden es confiable con el código correcto, pero podría no detectar siempre la falta del desempate.
 - La rama del error 2627 de `GuardarCambiosAsync` no tiene test: se traduce por prevención, y hoy el modelo solo tiene índices únicos (2601).
-
-### Riesgo aceptado: baja de cliente y alta de solicitud simultáneas
-
-Un `DELETE` del cliente y un `POST` de solicitud pueden pasar sus chequeos a la vez y dejar un cliente dado de baja con una solicitud pendiente. `RowVersion` no lo frena, porque insertar una solicitud no modifica la fila del cliente. Se acepta por el volumen esperado y porque la solicitud sigue visible y se puede resolver a mano. No tiene test. Si el volumen crece, la solución sería serializar las dos operaciones con un bloqueo sobre la fila del cliente, lo que implica revisar el ADR-0009.
+- La carrera entre una baja de cliente y el alta de una solicitud sigue sin test: es el riesgo aceptado en el ADR-0007, porque esas operaciones tocan filas distintas y ni `RowVersion` ni los índices la frenan.
