@@ -53,7 +53,7 @@ Hoja de ruta del proyecto, organizada en fases. Cada fase se cierra con un Pull 
 - [x] Proyecto de tests de integración con Testcontainers (SQL Server), `WebApplicationFactory` y Respawn
 - [x] Tests de integración de los endpoints de clientes y solicitudes
 - [x] Tests de concurrencia: índice único de DNI, índice filtrado de pendientes y `RowVersion`
-- [ ] ADR de la estrategia de testing
+- [x] ADR de la estrategia de testing
 
 **Entregable:** `dotnet test` en verde.
 
