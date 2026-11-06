@@ -69,6 +69,7 @@ Hoja de ruta del proyecto, organizada en fases. Cada fase se cierra con un Pull 
 - [ ] Estados de carga, error y lista vacía en cada pantalla
 - [ ] Tests de componentes con Vitest y React Testing Library
 - [ ] CORS habilitado en la API para el entorno local
+- [ ] Mensajes de validación del binder en español (hoy salen en inglés en el alta de clientes, `?estado=` inválido y `rechazar` sin motivo)
 
 **Entregable:** flujo completo usable desde el navegador.
 
@@ -95,6 +96,8 @@ Hoja de ruta del proyecto, organizada en fases. Cada fase se cierra con un Pull 
 - [ ] Backend: build, tests y deploy a App Service
 - [ ] Frontend: instalación, tests, build y deploy a Static Web Apps
 - [ ] Validación de Pull Requests: el deploy se bloquea si fallan los tests
+- [ ] `.gitattributes` con fines de línea normalizados (hoy cada commit avisa "LF will be replaced by CRLF")
+- [ ] Docker disponible en el agente para los tests de integración (Testcontainers)
 
 **Entregable:** un push a `main` publica automáticamente.
 
