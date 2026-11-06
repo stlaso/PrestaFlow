@@ -16,6 +16,7 @@ Dos proyectos, según lo que cada test necesita para fallar:
 | `PrestaFlow.UnitTests` | Dominio, `RelojNegocio`, services y mapeo a DTOs | Domain y Application, sin base | xUnit v3, Moq, `FakeTimeProvider` |
 | `PrestaFlow.IntegrationTests` | Endpoints, consultas, migraciones, índices y JSON | Api completa y SQL Server real | Testcontainers, `WebApplicationFactory`, Respawn |
 
+- **Moq solo para las dependencias de I/O:** en los unitarios se simulan los repositorios e `IUnitOfWork`. Las entidades y `RelojNegocio` son reales, y el tiempo se controla con `FakeTimeProvider`, que es una implementación falsa y no un mock.
 - **Base real y descartable:** Testcontainers levanta un contenedor de SQL Server por corrida y se aplican las migraciones reales.
 - **Limpieza con Respawn:** los tests de integración comparten el contenedor, corren en serie (`ICollectionFixture`) y cada uno arranca con las tablas vacías. Es más rápido que recrear la base.
 - **Entorno `Testing`:** con `Development` se cargarían los User Secrets, donde está la base local. Además, `PrestaFlowApiFactory` frena antes de migrar si la Api no apunta al contenedor.
@@ -31,6 +32,7 @@ Dos proyectos, según lo que cada test necesita para fallar:
 - **LocalDB o la base de desarrollo:** LocalDB solo funciona en Windows y una base compartida acumula estado entre corridas. Además, Respawn podría borrar datos de desarrollo.
 - **Recrear la base en cada test o usar transacciones con rollback:** recrearla es lenta; el rollback no sirve porque la Api guarda con su propio `DbContext` y su propia conexión.
 - **Muchos `POST` en paralelo para las carreras:** no es determinista. En una prueba manual, ningún request llegó a pasar el chequeo del service: el test daría verde sin ejercitar el respaldo de la base.
+- **Mockear también el dominio o el reloj:** el test verificaría las respuestas programadas en el mock y no la lógica real, y se rompería ante cualquier refactor interno.
 - **Stryker (mutation testing automatizado):** da una medida continua, pero suma tiempo de ejecución y otra herramienta a mantener. Se puede evaluar más adelante.
 
 ## Consecuencias
