@@ -8,7 +8,7 @@ Hoja de ruta del proyecto, organizada en fases. Cada fase se cierra con un Pull 
 | --- | --- | --- |
 | 0 | Preparación del entorno | ✅ |
 | 1 | API y dominio | ✅ |
-| 2 | Tests de backend | 🚧 |
+| 2 | Tests de backend | ✅ |
 | 3 | Frontend React | ⏳ |
 | 4 | Publicación en Azure | ⏳ |
 | 5 | CI/CD | ⏳ |
