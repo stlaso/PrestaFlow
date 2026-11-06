@@ -17,6 +17,7 @@ Las decisiones no se editan para cambiarlas: si una se reemplaza, se escribe un 
 | [0009](0009-concurrencia.md) | Concurrencia optimista y restricciones únicas como respaldo | Aceptada |
 | [0010](0010-contrato-http.md) | Contrato HTTP: acciones de negocio, DTOs y códigos de estado | Aceptada |
 | [0011](0011-listado-paginado.md) | Listado con filtros opcionales y paginación por offset | Aceptada |
+| [0012](0012-estrategia-de-testing.md) | Estrategia de testing en dos niveles contra SQL Server real | Aceptada |
 
 ## Formato
 
